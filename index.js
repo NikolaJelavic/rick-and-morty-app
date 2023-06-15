@@ -1,3 +1,14 @@
+import { createCharacterCard } from "./components/card/card.js";
+
+async function fetchData() {
+  const response = await fetch("https://rickandmortyapi.com");
+  const data = await response.json();
+  return data;
+}
+
+
+
+createCharacterCard();
 const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = document.querySelector(
   '[data-js="search-bar-container"]'
