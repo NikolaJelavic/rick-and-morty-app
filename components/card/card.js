@@ -1,15 +1,12 @@
 
-export function createCharacterCard() {}
+// export function createCharacterCard() {}
 
-
-=======
-
-// export async function fetchData() {
-//     const response = await fetch("https://rickandmortyapi.com/api/character");
-//     const data = await response.json();
-//     console.log(data);
-//     const character = data.results;
-//   }
+// // export async function fetchData() {
+// //     const response = await fetch("https://rickandmortyapi.com/api/character");
+// //     const data = await response.json();
+// //     console.log(data);
+// //     const character = data.results;
+// //   }
 
   
 export default function createCharacterCard(character) {
