@@ -1,7 +1,26 @@
-export function createCharacterCard() {
-  const cardContainer = document.querySelector('[data-js="card-container"]');
+
+// export async function fetchData() {
+//     const response = await fetch("https://rickandmortyapi.com/api/character");
+//     const data = await response.json();
+//     console.log(data);
+//     const character = data.results;
+//   }
+async function fetchData() {
+    const response = await fetch("https://rickandmortyapi.com/api/character");
+    const data = await response.json();
+    console.log(data);
+    const character = data.results;
+  }
+  
+    
+  
+
+export function createCharacterCard(character) {
+
+//   const cardContainer = document.querySelector('[data-js="card-container"]');
   const card = document.createElement("li");
-  card.innerHTML = `<li class="card">
+  card.classList.add("card");
+  card.innerHTML = `
 <div class="card__image-container">
   <img
     class="card__image"
@@ -11,7 +30,7 @@ export function createCharacterCard() {
   <div class="card__image-gradient"></div>
 </div>
 <div class="card__content">
-  <h2 class="card__title">Rick Sanchez</h2>
+  <h2 class="card__title">${character.name[1]}Rick Sanchez$</h2>
   <dl class="card__info">
     <dt class="card__info-title">Status</dt>
     <dd class="card__info-description">Alive</dd>
@@ -21,8 +40,8 @@ export function createCharacterCard() {
     <dd class="card__info-description">51</dd>
   </dl>
 </div>
-</li>`;
-  cardContainer.append(card);
+`;
+  return card;
 }
 // createCharacterCard();
 //Write a function createCharacterCard inside the card.js file and export it
