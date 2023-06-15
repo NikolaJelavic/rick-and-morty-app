@@ -1,55 +1,39 @@
-import { createCharacterCard } from "./components/card/card.js";
-// import { updatePagination } from "./components/nav-pagination/nav-pagination.js";
-
+// import  {createCharacterCard} from "./components/card/card.js";
+import createCharacterCard from "./components/card/card.js";
 const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = document.querySelector(
   '[data-js="search-bar-container"]'
 );
-const searchBar = document.querySelector('[data-js="search-bar"]');
 const navigation = document.querySelector('[data-js="navigation"]');
-const prevButton = document.querySelector('[data-js="button-prev"]');
-const nextButton = document.querySelector('[data-js="button-next"]');
-const pagination = document.querySelector('[data-js="pagination"]');
 
-const maxPage = 42;
-let page = 1;
+// States
+const maxPage = 1;
+const page = 1;
 const searchQuery = "";
 
-async function fetchCharacter(page) {
-  try {
-    const response = await fetch(
-      `https://rickandmortyapi.com/api/character?page=${page}`
-    );
-    cardContainer.innerHTML = "";
+searchBar.addEventListener("submit", (e) => {
+  e.preventDefault();
+  // console.log("e=", e.target.value);
+  const formData = new FormData(e.target);
+  console.log("e=", Object.fromEntries(formData));
+  searchQuery = e.target.value;
 
-    if (response.ok) {
-      const data = await response.json();
-      data.results.forEach((character) => {
-        let newCard = createCharacterCard(character);
-        cardContainer.append(newCard);
-      });
-    } else {
-      console.error("Bad Response");
-    }
-  } catch (error) {
-    console.error("An Error occurred", error);
-  }
+  fetchCharacter();
+});
+
+navigation.append(prevButton, pagination, nextButton);
+searchBarContainer.append(searchBar);
+
+fetchCharacters();
+
+async function fetchCharacters() {
+  const result = await fetch(
+    `https://rickandmortyapi.com/api/character/?page=${page}&name=${searchQuery}`
+  );
+  const data = await result.json();
+  maxPage = data.info.pages;
+  const characters = data.results;
+  pagination.textContent = `${page} / ${maxPage}`;
+  cardContainer.innerHTML = "";
+  characters.map(createCard).forEach((card) => cardContainer.append(card));
 }
-
-fetchCharacter(page);
-
-nextButton.addEventListener("click", () => {
-  if (page < maxPage) {
-    page = page + 1;
-    fetchCharacter(page);
-    updatePagination(page, maxPage, pagination);
-  }
-});
-
-prevButton.addEventListener("click", () => {
-  if (page > 1) {
-    page = page - 1;
-    fetchCharacter(page);
-    updatePagination(page, maxPage, pagination);
-  }
-});
