@@ -1,4 +1,9 @@
 
+export function createCharacterCard() {}
+
+
+=======
+
 // export async function fetchData() {
 //     const response = await fetch("https://rickandmortyapi.com/api/character");
 //     const data = await response.json();
@@ -37,3 +42,4 @@ export default function createCharacterCard(character) {
 }
 // createCharacterCard();
 //Write a function createCharacterCard inside the card.js file and export it
+
