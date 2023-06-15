@@ -1,15 +1,12 @@
 
-export function createCharacterCard() {}
+// export function createCharacterCard() {}
 
-
-=======
-
-// export async function fetchData() {
-//     const response = await fetch("https://rickandmortyapi.com/api/character");
-//     const data = await response.json();
-//     console.log(data);
-//     const character = data.results;
-//   }
+// // export async function fetchData() {
+// //     const response = await fetch("https://rickandmortyapi.com/api/character");
+// //     const data = await response.json();
+// //     console.log(data);
+// //     const character = data.results;
+// //   }
 
   
 export default function createCharacterCard(character) {
@@ -21,7 +18,7 @@ export default function createCharacterCard(character) {
 <div class="card__image-container">
   <img
     class="card__image"
-    src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+    src="${character.image}"
     alt="Rick Sanchez"
   />
   <div class="card__image-gradient"></div>
