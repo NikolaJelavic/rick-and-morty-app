@@ -9,7 +9,7 @@ const cardContainer = document.querySelector('[data-js="card-container"]');
     const response = await fetch("https://rickandmortyapi.com/api/character");
     const data = await response.json();
     console.log(data.results);
-    const characters = data.results;
+    const characters = data.results.slice(0, 20);
 
     // Make sure that the cardContainer is emptied every time new characters are fetched 
     cardContainer.innerHTML = '';
