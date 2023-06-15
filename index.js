@@ -1,31 +1,39 @@
-// import  {createCharacterCard} from "./components/card/card.js";
-import createCharacterCard from "./components/card/card.js";
+console.clear();
+
+import createCard from "./components/card/card.js";
+import createNavButton from "./components/nav-button/nav-button.js";
+import createPagination from "./components/nav-pagination/nav-pagination.js";
+import createSearchBar from "./components/search-bar/search-bar.js";
 const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = document.querySelector(
   '[data-js="search-bar-container"]'
 );
 const navigation = document.querySelector('[data-js="navigation"]');
-
 // States
-const maxPage = 1;
-const page = 1;
-const searchQuery = "";
-
-searchBar.addEventListener("submit", (e) => {
-  e.preventDefault();
-  // console.log("e=", e.target.value);
-  const formData = new FormData(e.target);
-  console.log("e=", Object.fromEntries(formData));
-  searchQuery = e.target.value;
-
-  fetchCharacter();
+let maxPage = 42;
+let page = 1;
+let searchQuery = "";
+// Components
+const prevButton = createNavButton("prev", () => {
+  if (page <= 1) return;
+  page--;
+  fetchCharacters();
 });
-
+const nextButton = createNavButton("next", () => {
+  if (page >= maxPage) return;
+  page++;
+  fetchCharacters();
+});
+const pagination = createPagination();
+const searchBar = createSearchBar((event) => {
+  event.preventDefault();
+  searchQuery = event.target.elements.query.value;
+  page = 1;
+  fetchCharacters();
+});
 navigation.append(prevButton, pagination, nextButton);
 searchBarContainer.append(searchBar);
-
 fetchCharacters();
-
 async function fetchCharacters() {
   const result = await fetch(
     `https://rickandmortyapi.com/api/character/?page=${page}&name=${searchQuery}`
