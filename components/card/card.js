@@ -1,17 +1,5 @@
-
-// export function createCharacterCard() {}
-
-// // export async function fetchData() {
-// //     const response = await fetch("https://rickandmortyapi.com/api/character");
-// //     const data = await response.json();
-// //     console.log(data);
-// //     const character = data.results;
-// //   }
-
-  
-export default function createCharacterCard(character) {
-
-//   const cardContainer = document.querySelector('[data-js="card-container"]');
+export function createCharacterCard(character) {
+  //   const cardContainer = document.querySelector('[data-js="card-container"]');
   const card = document.createElement("li");
   card.classList.add("card");
   card.innerHTML = `
@@ -39,4 +27,3 @@ export default function createCharacterCard(character) {
 }
 // createCharacterCard();
 //Write a function createCharacterCard inside the card.js file and export it
-
