@@ -13,17 +13,41 @@ const navigation = document.querySelector('[data-js="navigation"]');
 let maxPage = 42;
 let page = 1;
 let searchQuery = "";
+
+
 // Components
-const prevButton = createNavButton("prev", () => {
+const prevButton = createNavButton("<<< prev ", () => {
   if (page <= 1) return;
   page--;
   fetchCharacters();
+   
+  if (page === maxPage - 1) {
+    nextButton.classList.add("button"); // Add this line to restore the nextButton style
+    nextButton.textContent = "next >>>"; // Add this line to restore the nextButton text
+  }
+
 });
-const nextButton = createNavButton("next", () => {
+
+
+
+
+
+const nextButton = createNavButton("next >>>", () => {
   if (page >= maxPage) return;
   page++;
   fetchCharacters();
+
+  if (page === maxPage) {
+    nextButton.classList.remove("button");
+    nextButton.textContent = "<<< no more pages";
+    nextButton.style.color = "red"; // Set font color to red
+    nextButton.style.backgroundColor = "var(--color-water-10)"; // Set background color to white
+  }
+  
 });
+
+
+
 const pagination = createPagination();
 const searchBar = createSearchBar((event) => {
   event.preventDefault();
